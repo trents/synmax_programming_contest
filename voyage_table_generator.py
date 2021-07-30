@@ -1,5 +1,7 @@
 """ Voyage Table Generator """
 
+import datetime
+
 class Port:
     def __init__(self, port, lat, long):
         self.port = int(port)
@@ -70,7 +72,7 @@ voyages = []
 
 for loc in long_array:
     for port in port_data:
-        if abs(port.long - loc.long) < 0.01 and abs(port.lat - loc.lat) < 0.01:
+        if abs(port.long - loc.long) < 0.013 and abs(port.lat - loc.lat) < 0.013:
             if prev_port != port and loc.vessel != prev_loc.vessel:
                 prev_port = port
                 prev_loc = loc
@@ -80,6 +82,8 @@ for loc in long_array:
                 prev_loc = loc
 
     i += 1
+
+print(voyages)
 
 file3 = open("voyages.csv","w")
 file3.write("vessel,begin_date,end_date,begin_port_id,end_port_id\n")
